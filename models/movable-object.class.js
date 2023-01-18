@@ -19,7 +19,6 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img;
         })
-
     }
 
 
@@ -28,7 +27,9 @@ class MovableObject {
     }
 
 
-    moveLeft() {
-
+    moveLeft(speed) {
+        setInterval(() => {
+            this.x -= speed;
+        }, 1000 / 60);
     }
 }
