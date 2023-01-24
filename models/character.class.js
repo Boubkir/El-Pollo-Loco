@@ -2,7 +2,7 @@ class Character extends MovableObject {
     speed = 10;
     height = 300;
     width = 150;
-    x = 100;
+    x = 200;
     y = 150;
     IMAGES_WALKING = [
         '../img/2_character_pepe/2_walk/W-21.png',
@@ -12,38 +12,58 @@ class Character extends MovableObject {
         '../img/2_character_pepe/2_walk/W-25.png',
         '../img/2_character_pepe/2_walk/W-26.png'
     ]
+
+    IMAGES_JUMPING = [
+        '../img/2_character_pepe/3_jump/J-31.png',
+        '../img/2_character_pepe/3_jump/J-32.png',
+        '../img/2_character_pepe/3_jump/J-33.png',
+        '../img/2_character_pepe/3_jump/J-34.png',
+        '../img/2_character_pepe/3_jump/J-35.png',
+        '../img/2_character_pepe/3_jump/J-36.png',
+        '../img/2_character_pepe/3_jump/J-37.png',
+        '../img/2_character_pepe/3_jump/J-38.png',
+        '../img/2_character_pepe/3_jump/J-39.png'
+    ]
+
     currentImage = 0;
     world;
 
     constructor() {
         super().loadImage('../img/2_character_pepe/1_idle/idle/I-1.png')
         this.loadImages(this.IMAGES_WALKING)
+        this.loadImages(this.IMAGES_JUMPING)
         this.animate()
+        this.applyGravity();
     }
 
     animate() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            if (this.world.keyboard.RIGHT && this.x < 700 * 2) {
+                this.moveRight();
                 this.otherDirection = false;
-                let i = this.currentImage % this.IMAGES_WALKING.length;
-                let path = this.IMAGES_WALKING[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
-                this.x += this.speed;
             }
-            if (this.world.keyboard.LEFT) {
+
+            if (this.world.keyboard.LEFT && this.x > -520) {
+                this.moveLeft();
                 this.otherDirection = true;
-                let i = this.currentImage % this.IMAGES_WALKING.length;
-                let path = this.IMAGES_WALKING[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
-                this.x -= this.speed;
             }
-            this.world.camera_x = -this.x
-        }, 1000/15);
+
+            if (this.world.keyboard.UP && !this.isAboveGround()) {
+                this.jump();
+            }
+            this.world.camera_x = -this.x + 100;
+        }, 1000 / 60)
+
+        setInterval(() => {
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMPING)
+            } else {
+
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                    this.playAnimation(this.IMAGES_WALKING)
+                }
+            }
+        }, 200);
     }
 
-    jump() {
-
-    }
 }
