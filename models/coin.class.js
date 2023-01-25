@@ -1,3 +1,3 @@
-class Coin extends MovableObject{
+class Coin extends MovableObjects{
   
 }
