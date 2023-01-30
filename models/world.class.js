@@ -61,7 +61,7 @@ class World {
         }
 
         mo.draw(this.ctx)
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -149,7 +149,14 @@ class World {
             if (this.bottle.isColliding(enemys)) {
                 let index = this.level.enemies.indexOf(enemys)
                 this.level.enemies.splice(index, 1)
-            }
+            }ƒ
         })
+    }
+
+    checkJumpOnChicken(){
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
     }
 }

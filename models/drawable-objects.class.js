@@ -28,7 +28,7 @@ class DrawableObjects {
       ctx.stroke();
     }
   }
-
+      //ctx.rect(this.x +25, this.y + 120, this.width - 65, this.height - 130);
 
   loadImages(arr) {
     arr.forEach((path) => {
