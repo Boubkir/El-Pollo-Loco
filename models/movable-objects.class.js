@@ -5,6 +5,7 @@ class MovableObjects extends DrawableObjects {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    bottles = 100;
 
 
     applyGravity() {
@@ -18,7 +19,11 @@ class MovableObjects extends DrawableObjects {
 
 
     isAboveGround() {
-        return this.y < 145
+        if (this instanceof ThrowableObjects) {
+            return true
+        } else {
+            return this.y < 145
+        }
     }
 
 
@@ -59,6 +64,13 @@ class MovableObjects extends DrawableObjects {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
+        }
+    }
+
+    throwAwayBottle(){
+        this.bottles -=10;
+        if(this.bottles < 0){
+            this.bottles = 0
         }
     }
 
