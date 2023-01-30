@@ -12,6 +12,8 @@ class World {
     throwableObjects = []
     statusBottleBar = new StatusBottleBar();
     statusCoinBar = new StatusCoinBar();
+    coin = new Coin();
+    bottle = new Bottle();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,6 +35,8 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coin);
+        this.addObjectsToMap(this.level.bottle);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBottleBar);
@@ -96,10 +100,37 @@ class World {
     }
 
 
+    collectBottle(){
+        this.level.bottle.forEach((bottles)=>{
+            if (this.character.isColliding(bottles) && this.character.bottles <= 100){
+                this.character.bottles += 10;
+                this.statusBottleBar.setPercentage(this.character.bottles)
+                let index = this.level.bottle.indexOf(bottles)
+                this.level.bottle.splice(index,1)
+            }
+        })
+    }
+
+
+    collectCoin() {
+        this.level.coin.forEach((coins) => {
+            if (this.character.isColliding(coins) && this.character.coins <= 100) {
+                this.character.coins += 10;
+                this.statusCoinBar.setPercentage(this.character.coins)
+                let index = this.level.coin.indexOf(coins)
+                this.level.coin.splice(index, 1)
+            }
+        })
+    }
+
+
     run() {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.collectBottle();
+            this.collectCoin();
+            this.checkBottleHitTarget();
         }, 200)
     }
 
@@ -111,5 +142,14 @@ class World {
             this.character.bottles -= 10;
             this.statusBottleBar.setPercentage(this.character.bottles)
         }
+    }
+
+    checkBottleHitTarget(){
+        this.level.enemies.forEach((enemys) => {
+            if (this.bottle.isColliding(enemys)) {
+                let index = this.level.enemies.indexOf(enemys)
+                this.level.enemies.splice(index, 1)
+            }
+        })
     }
 }
