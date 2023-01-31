@@ -1,18 +1,18 @@
-class Coin extends MovableObjects{
+class Heart extends MovableObjects {
   height = 130;
   width = 130;
   y = 350;
   currentImage = 0;
   offset = {
     top: 45,
-    left: 45,
-    right: 90,
-    bottom: 90,
+    left: 25,
+    right: 55,
+    bottom: 65,
   }
 
 
   constructor() {
-    super().loadImage('../img/8_coin/coin_2.png')
+    super().loadImage('../img/7_statusbars/3_icons/icon_health.png')
     this.x = 100 + Math.random() * 1000;
     this.y = 350 - Math.random() * 350;
   }

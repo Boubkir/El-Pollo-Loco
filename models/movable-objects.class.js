@@ -7,6 +7,12 @@ class MovableObjects extends DrawableObjects {
     lastHit = 0;
     bottles = 0;
     coins = 0;
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 
 
     applyGravity() {
@@ -54,10 +60,15 @@ class MovableObjects extends DrawableObjects {
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x &&
+            this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height
     }
 
+
+    isJumpOnChicken(mo) {
+        return this.y + this.height > mo.y &&
+            this.x < mo.x + mo.width
+    }
 
     hit() {
         this.energy -= 5;
@@ -68,9 +79,9 @@ class MovableObjects extends DrawableObjects {
         }
     }
 
-    throwAwayBottle(){
-        this.bottles -=10;
-        if(this.bottles < 0){
+    throwAwayBottle() {
+        this.bottles -= 10;
+        if (this.bottles < 0) {
             this.bottles = 0
         }
     }

@@ -14,6 +14,12 @@ class Endboss extends MovableObjects {
     '../img/4_enemie_boss_chicken/2_alert/G11.png',
     '../img/4_enemie_boss_chicken/2_alert/G12.png'
   ]
+  offset = {
+    top: 50,
+    left: 10,
+    right: 20,
+    bottom: 60,
+  }
 
 
   constructor() {

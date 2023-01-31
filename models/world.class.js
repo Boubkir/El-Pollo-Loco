@@ -14,6 +14,7 @@ class World {
     statusCoinBar = new StatusCoinBar();
     coin = new Coin();
     bottle = new Bottle();
+    heart = new Heart();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -36,6 +37,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coin);
+        this.addObjectsToMap(this.level.heart);
         this.addObjectsToMap(this.level.bottle);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
@@ -61,7 +63,7 @@ class World {
         }
 
         mo.draw(this.ctx)
-        mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx, mo);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -100,13 +102,13 @@ class World {
     }
 
 
-    collectBottle(){
-        this.level.bottle.forEach((bottles)=>{
-            if (this.character.isColliding(bottles) && this.character.bottles <= 100){
+    collectBottle() {
+        this.level.bottle.forEach((bottles) => {
+            if (this.character.isColliding(bottles) && this.character.bottles <= 100) {
                 this.character.bottles += 10;
                 this.statusBottleBar.setPercentage(this.character.bottles)
                 let index = this.level.bottle.indexOf(bottles)
-                this.level.bottle.splice(index,1)
+                this.level.bottle.splice(index, 1)
             }
         })
     }
@@ -123,6 +125,17 @@ class World {
         })
     }
 
+    collectHeart() {
+        this.level.heart.forEach((hearts) => {
+            if (this.character.isColliding(hearts) && this.character.energy <= 100) {
+                this.character.energy += 10;
+                this.statusBar.setPercentage(this.character.energy)
+                let index = this.level.heart.indexOf(hearts)
+                this.level.heart.splice(index, 1)
+            }
+        })
+    }
+
 
     run() {
         setInterval(() => {
@@ -131,7 +144,9 @@ class World {
             this.collectBottle();
             this.collectCoin();
             this.checkBottleHitTarget();
-        }, 200)
+            this.checkIfJumpOnChicken();
+            this.collectHeart();
+        }, 100)
     }
 
 
@@ -144,19 +159,22 @@ class World {
         }
     }
 
-    checkBottleHitTarget(){
+    checkBottleHitTarget() {
         this.level.enemies.forEach((enemys) => {
             if (this.bottle.isColliding(enemys)) {
                 let index = this.level.enemies.indexOf(enemys)
                 this.level.enemies.splice(index, 1)
-            }ƒ
+            }
         })
     }
 
-    checkJumpOnChicken(){
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+
+    checkIfJumpOnChicken() {
+        this.level.enemies.forEach((enemys) => {
+            if (this.character.isJumpOnChicken(enemys) && this instanceof Chicken) {
+                let index = this.level.enemies.indexOf(enemys)
+                this.level.enemies.splice(index, 1)
+            }
+        })
     }
 }
