@@ -4,10 +4,10 @@ class Coin extends MovableObjects{
   y = 350;
   currentImage = 0;
   offset = {
-    top: 45,
-    left: 45,
-    right: 90,
-    bottom: 90,
+    top: 20,
+    bottom: 20,
+    left: 20,
+    right: 20
   }
 
 

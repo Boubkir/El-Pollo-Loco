@@ -7,6 +7,10 @@ class Chicken extends MovableObjects {
         '../img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
         '../img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ]
+
+    IMAGES_DEATH = [
+        '../img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+    ]
     currentImage = 0;
     offset = {
         top: 5,
@@ -14,6 +18,7 @@ class Chicken extends MovableObjects {
         right: 10,
         bottom: 10,
     }
+    energy = 10;
 
 
     constructor() {
@@ -31,7 +36,11 @@ class Chicken extends MovableObjects {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING)
+            if (this.isDeath()) {
+                this.playAnimation(this.IMAGES_DEATH)
+            } else {
+                this.playAnimation(this.IMAGES_WALKING)
+            }
         }, 100);
     }
 

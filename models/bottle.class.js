@@ -8,10 +8,10 @@ class Bottle extends MovableObjects {
     '../img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
   ]
   offset = {
-    top: 20,
-    left: 60,
-    right: 85,
-    bottom: 30,
+    top: 0,
+    bottom: 0,
+    left: 20,
+    right: 20
   }
 
 

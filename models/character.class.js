@@ -5,11 +5,12 @@ class Character extends MovableObjects {
     x = 0;
     y = 150;
     offset = {
-        top: 130,
-        left: 30,
-        right: 75,
-        bottom: 145,
+        top: 120,
+        bottom: 10,
+        left: 40,
+        right: 30,
     }
+    energy = 100;
 
 
     IMAGES_WALKING = [

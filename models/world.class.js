@@ -63,7 +63,7 @@ class World {
         }
 
         mo.draw(this.ctx)
-        mo.drawFrame(this.ctx, mo);
+        //mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -100,6 +100,7 @@ class World {
             }
         })
     }
+
 
 
     collectBottle() {
@@ -170,11 +171,17 @@ class World {
 
 
     checkIfJumpOnChicken() {
+
         this.level.enemies.forEach((enemys) => {
-            if (this.character.isJumpOnChicken(enemys) && this instanceof Chicken) {
-                let index = this.level.enemies.indexOf(enemys)
-                this.level.enemies.splice(index, 1)
+            if (this.character.isColliding(enemys) && this.character.isAboveGround()) {
+                this.character.speedY = 30;
+                this.deleteObjectFromArray(this.level.enemies, enemys)
             }
         })
+    }
+
+    deleteObjectFromArray(array,object) {
+        let i = array.indexOf(object);
+        array.splice(i, 1);
     }
 }
