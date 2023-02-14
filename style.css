@@ -1,8 +1,10 @@
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url('../img/5_background/layers/desert.jpg');
+    background-size: cover;
     background-position: center;
     color: white;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
@@ -11,9 +13,43 @@ body {
 }
 
 canvas {
+    position: absolute;
     background-color: black;
     display: block;
+    border-radius: 10px;
+    box-shadow: 0px 0 10px 10px rgba(0, 0, 0, 0.5);
 }
+
+.canvas-div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+}
+
+.start-screen-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+
+.start-screen {
+    width: 720px;
+    height: 480px;
+    border-radius: 10px;
+}
+
+.btnPlay {
+    position: relative;
+}
+
+.steeringIcon {
+    position: relative;
+}
+
 
 
 @media only screen and (max-width:720px) {
@@ -23,6 +59,12 @@ canvas {
 
     h1 {
         display: none;
+    }
+
+    .start-screen {
+        width: 100%;
+        height: auto;
+
     }
 }
 

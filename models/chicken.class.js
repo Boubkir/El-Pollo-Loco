@@ -19,6 +19,7 @@ class Chicken extends MovableObjects {
         bottom: 10,
     }
     energy = 10;
+    deadChickenSound = new Audio('audio/chicken.mp3')
 
 
     constructor() {
@@ -31,15 +32,18 @@ class Chicken extends MovableObjects {
 
 
     animate() {
-        setInterval(() => {
+        let movingChickenInverval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isDeath()) {
-                this.playAnimation(this.IMAGES_DEATH)
-            } else {
+            if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING)
+            } else {
+                this.deadChickenSound.play()
+                this.deadChickenSound = false
+                this.loadImage(this.IMAGES_DEATH)
+                clearInterval(movingChickenInverval)
             }
         }, 100);
     }

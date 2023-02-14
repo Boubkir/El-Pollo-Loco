@@ -85,7 +85,7 @@ class MovableObjects extends DrawableObjects {
     }
 
 
-    isDeath() {
+    isDead() {
         return this.energy == 0;
     }
 
@@ -96,7 +96,7 @@ class MovableObjects extends DrawableObjects {
         return timePassed < 1;
     }
 
-    chickenKilled() {
+    killObject() {
         return this.energy = 0;
     }
 

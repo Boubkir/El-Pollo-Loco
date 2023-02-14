@@ -15,6 +15,8 @@ class World {
     coin = new Coin();
     bottle = new Bottle();
     heart = new Heart();
+    gameSound = new Audio('audio/game.mp3')
+    collectItemSound = new Audio('audio/collect.mp3')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -49,6 +51,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
+        this.gameSound.play()
 
 
         requestAnimationFrame(function () {
@@ -110,6 +113,7 @@ class World {
                 this.statusBottleBar.setPercentage(this.character.bottles)
                 let index = this.level.bottle.indexOf(bottles)
                 this.level.bottle.splice(index, 1)
+                this.collectItemSound.play()
             }
         })
     }
@@ -122,6 +126,7 @@ class World {
                 this.statusCoinBar.setPercentage(this.character.coins)
                 let index = this.level.coin.indexOf(coins)
                 this.level.coin.splice(index, 1)
+                this.collectItemSound.play()
             }
         })
     }
@@ -133,6 +138,7 @@ class World {
                 this.statusBar.setPercentage(this.character.energy)
                 let index = this.level.heart.indexOf(hearts)
                 this.level.heart.splice(index, 1)
+                this.collectItemSound.play()
             }
         })
     }
@@ -171,17 +177,21 @@ class World {
 
 
     checkIfJumpOnChicken() {
-
         this.level.enemies.forEach((enemys) => {
             if (this.character.isColliding(enemys) && this.character.isAboveGround()) {
+                enemys.killObject()
                 this.character.speedY = 30;
-                this.deleteObjectFromArray(this.level.enemies, enemys)
+                setTimeout(() => {
+                    this.deleteObjectFromArray(this.level.enemies, enemys)
+                }, 700);
             }
         })
     }
 
-    deleteObjectFromArray(array,object) {
+    deleteObjectFromArray(array, object) {
         let i = array.indexOf(object);
         array.splice(i, 1);
     }
+
+    
 }
