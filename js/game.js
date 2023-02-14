@@ -1,11 +1,18 @@
 let canvas;
 let world;
 let keyboard = new Keyboard;
+let muted = false;
+let walkingSound = new Audio('audio/walking.mp3');
+let jumpingSound = new Audio('audio/jump.mp3');
+let gameSound = new Audio('audio/game.mp3');
+let collectItemSound = new Audio('audio/collect.mp3');
+let throwBottleSound = new Audio ('audio/throw.mp3');
+let bottleSplashSound = new Audio('audio/bottle-splash.mp3');
+let deadChickenSound = new Audio('audio/chicken.mp3');
 
 
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+
 }
 
 
@@ -26,7 +33,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.SPACE = true;
         console.log(keyboard.SPACE)
     };
- 
+
 });
 
 
@@ -49,6 +56,31 @@ window.addEventListener('keyup', (e) => {
     };
 });
 
+function startGame() {
+    document.getElementById('play-button').style.display = "none";
+    document.getElementById('start-picture').style.display = "none";
+    startLevel();
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+}
 
+function mutePage() {
+    walkingSound.muted = !walkingSound.muted
+    jumpingSound.muted = !jumpingSound.muted
+    bottleSplashSound.muted = !bottleSplashSound.muted
+    gameSound.muted = !gameSound.muted
+    collectItemSound.muted = !collectItemSound.muted
+    throwBottleSound.muted = !throwBottleSound.muted
+    deadChickenSound.muted =!deadChickenSound.muted
+    muted = !muted;
+    toggleSound();
+}
 
+function toggleSound(){
+    if(muted){
+        document.getElementById('audio-button').src = 'img/icons/audio.png';
+    }else{
+        document.getElementById('audio-button').src = 'img/icons/muted.png';
+    }
+}
 

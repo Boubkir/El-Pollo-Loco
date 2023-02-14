@@ -1,12 +1,21 @@
 class ThrowableObjects extends MovableObjects {
 
-  IMAGES=[
+  IMAGES_ROTATE = [
     'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
     'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
     'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
     'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
   ]
 
+  IMAGES_SPLASH = [
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+    'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+  ];
+  
 
 
   constructor(x, y) {
@@ -15,7 +24,8 @@ class ThrowableObjects extends MovableObjects {
     this.y = y;
     this.height = 100;
     this.throw();
-    this.loadImages(this.IMAGES)
+    this.loadImages(this.IMAGES_ROTATE)
+    this.loadImages(this.IMAGES_SPLASH)
     this.animate();
   }
 
@@ -25,13 +35,21 @@ class ThrowableObjects extends MovableObjects {
     this.applyGravity();
     setInterval(() => {
       this.x += 10;
-    },25)
-
+    }, 25)
   }
 
   animate() {
-    setInterval(() => {
-      this.playAnimation(this.IMAGES)
+
+    let throwAnimation = setInterval(() => {
+      if (this.y >= 325) {
+        bottleSplashSound.play()
+        this.playAnimation(this.IMAGES_SPLASH)
+        this.y = 350;
+        bottleSplashSound.play()
+        clearInterval(throwAnimation)
+      } else {
+        this.playAnimation(this.IMAGES_ROTATE)
+      }
     }, 50);
   }
 }

@@ -4,8 +4,8 @@ body {
     flex-direction: column;
     align-items: center;
     background-image: url('../img/5_background/layers/desert.jpg');
-    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     color: white;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 45px;
@@ -13,42 +13,73 @@ body {
 }
 
 canvas {
-    position: absolute;
     background-color: black;
     display: block;
     border-radius: 10px;
     box-shadow: 0px 0 10px 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .canvas-div {
     position: relative;
-    display: flex;
-    justify-content: center;
-
 }
 
-.start-screen-container {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-}
-
-
-.start-screen {
+.start-picture {
+    position: absolute;
     width: 720px;
     height: 480px;
+    z-index: 1;
     border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
-.btnPlay {
-    position: relative;
+.audio-button {
+    position: absolute;
+    z-index: 2;
+    right: -330px;
+    top: 20px;
+    cursor: pointer;
 }
 
-.steeringIcon {
-    position: relative;
+.play-button {
+    position: absolute;
+    z-index: 2;
+    height: 132px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer;
 }
+
+.info {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    top: -61px;
+    left: -348px;
+    font-size: 24px;
+    letter-spacing: normal;
+    gap: 20px;
+    width: 720px;
+}
+
+.info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.play-info {
+    position: absolute;
+    z-index: 2;
+    font-size: 26px;
+    letter-spacing: normal;
+    left: -325px;
+    top: 64px;
+}
+
 
 
 

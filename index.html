@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="font.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png">
         <script src="models/drawable-objects.class.js"></script>
         <script src="models/movable-objects.class.js"></script>
         <script src="models/character.class.js"></script>
@@ -31,15 +32,24 @@
 
     <body onload="init()">
         <h1>El Pollo Loco</h1>
-
         <div class="canvas-div">
-            <canvas id="canvas" width="720px" height="480 "></canvas>
-
-            <div class="start-screen-container">
-                <img src="img/9_intro_outro_screens/start/startscreen_2.png" class="start-screen" id="startScreen">
+            <div class="info">
+                <span><img src="img/icons/space.png" alt=""><span> = THROW BOTTLE</span></span>
+                <span><img src="img/icons/left.png" alt=""><span> = WALK LEFT</span></span>
+                <span><img src="img/icons/up.png" alt=""><span> = JUMP</span></span>
+                <span><img src="img/icons/right.png" alt=""><span> = WALK RIGHT</span></span>
             </div>
-
+            <canvas id="canvas" width="720px" height="480 "></canvas>
+            <div>
+                <span class="play-info">Press Play to Start the Game</span>
+                <img id="audio-button" onclick="mutePage()" class="audio-button"  src="img/icons/muted.png" alt="">
+                <img onclick="startGame()" class="play-button" id="play-button" src="img/icons/play.png" alt="">
+                <img id="start-picture" class="start-picture" src="img/9_intro_outro_screens/start/startscreen_2.png" alt="">
+            </div>
         </div>
+       
+
+
     </body>
 
 </html>

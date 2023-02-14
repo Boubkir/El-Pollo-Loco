@@ -15,9 +15,6 @@ class World {
     coin = new Coin();
     bottle = new Bottle();
     heart = new Heart();
-    gameSound = new Audio('audio/game.mp3')
-    collectItemSound = new Audio('audio/collect.mp3')
-    throwBottleSound = new Audio('audio/throw.mp3')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -52,7 +49,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
-        this.gameSound.play()
+        gameSound.play()
 
 
         requestAnimationFrame(function () {
@@ -114,7 +111,7 @@ class World {
                 this.statusBottleBar.setPercentage(this.character.bottles)
                 let index = this.level.bottle.indexOf(bottles)
                 this.level.bottle.splice(index, 1)
-                this.collectItemSound.play()
+                collectItemSound.play()
             }
         })
     }
@@ -127,10 +124,11 @@ class World {
                 this.statusCoinBar.setPercentage(this.character.coins)
                 let index = this.level.coin.indexOf(coins)
                 this.level.coin.splice(index, 1)
-                this.collectItemSound.play()
+                collectItemSound.play()
             }
         })
     }
+
 
     collectHeart() {
         this.level.heart.forEach((hearts) => {
@@ -139,10 +137,12 @@ class World {
                 this.statusBar.setPercentage(this.character.energy)
                 let index = this.level.heart.indexOf(hearts)
                 this.level.heart.splice(index, 1)
-                this.collectItemSound.play()
+                collectItemSound.play()
             }
         })
     }
+
+
 
 
     run() {
@@ -151,7 +151,7 @@ class World {
             this.checkThrowObjects();
             this.collectBottle();
             this.collectCoin();
-            this.checkBottleHitTarget();
+            this.checkBottleHitChicken();
             this.checkIfJumpOnChicken();
             this.collectHeart();
         }, 100)
@@ -163,18 +163,28 @@ class World {
             let bottle = new ThrowableObjects(this.character.x + 60, this.character.y + 100)
             this.throwableObjects.push(bottle)
             this.character.bottles -= 10;
-            this.throwBottleSound.play()
+            throwBottleSound.play()
             this.statusBottleBar.setPercentage(this.character.bottles)
         }
     }
 
-    checkBottleHitTarget() {
-        this.level.enemies.forEach((enemys) => {
-            if (this.bottle.isColliding(enemys)) {
-                let index = this.level.enemies.indexOf(enemys)
-                this.level.enemies.splice(index, 1)
-            }
+    checkBottleHitChicken() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemys) => {
+                if (bottle.isColliding(enemys)) {
+                    bottleSplashSound.play();
+                    deadChickenSound.play();
+                    enemys.killObject()
+                    setTimeout(() => {
+                        this.deleteObjectFromArray(this.level.enemies, enemys)
+                    }, 700);
+                }
+            })
         })
+    }
+
+    checkBottleHitGround() {
+
     }
 
 
@@ -183,6 +193,7 @@ class World {
             if (this.character.isColliding(enemys) && this.character.isAboveGround()) {
                 enemys.killObject()
                 this.character.speedY = 30;
+                deadChickenSound.play();
                 setTimeout(() => {
                     this.deleteObjectFromArray(this.level.enemies, enemys)
                 }, 700);
@@ -195,5 +206,5 @@ class World {
         array.splice(i, 1);
     }
 
-    
+
 }
