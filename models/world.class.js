@@ -17,6 +17,7 @@ class World {
     heart = new Heart();
     gameSound = new Audio('audio/game.mp3')
     collectItemSound = new Audio('audio/collect.mp3')
+    throwBottleSound = new Audio('audio/throw.mp3')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -162,6 +163,7 @@ class World {
             let bottle = new ThrowableObjects(this.character.x + 60, this.character.y + 100)
             this.throwableObjects.push(bottle)
             this.character.bottles -= 10;
+            this.throwBottleSound.play()
             this.statusBottleBar.setPercentage(this.character.bottles)
         }
     }
