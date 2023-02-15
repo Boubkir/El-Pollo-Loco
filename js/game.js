@@ -87,3 +87,12 @@ function toggleSound(){
     }
 }
 
+
+function restartGame(){
+    document.getElementById('game-over').style.display = "none";
+    document.getElementById('new-game').style.display = "none";
+    document.getElementById('game-info').style.display = "flex";
+    document.getElementById('play-button').style.display = "flex";
+    document.getElementById('start-picture').style.display = "flex";
+}
+

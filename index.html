@@ -40,8 +40,12 @@
                 <span><img src="img/icons/up.png" alt=""><span> = JUMP</span></span>
                 <span><img src="img/icons/right.png" alt=""><span> = WALK RIGHT</span></span>
             </div>
+            <div class="game-over">
+
+            </div>
             <canvas id="canvas" width="720px" height="480 "></canvas>
-            <div>
+            <span class="new-game" onclick="restartGame()" id="new-game">New Game</span>
+            <img class="game-over" id="game-over" src="img/9_intro_outro_screens/game_over/oh no you lost!.png" alt="">
                 <span id="game-info" class="game-info">Press Play to Start the Game</span>
                 <img id="audio-button" onclick="mutePage()" class="audio-button"  src="img/icons/muted.png" alt="">
                 <img onclick="startGame()" class="play-button" id="play-button" src="img/icons/play.png" alt="">

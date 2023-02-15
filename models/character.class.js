@@ -10,7 +10,7 @@ class Character extends MovableObjects {
         left: 35,
         right: 35,
     }
-    bottles=100;
+    bottles = 100;
     energy = 100;
 
     IMAGES_WALKING = [
@@ -67,25 +67,25 @@ class Character extends MovableObjects {
     }
 
     animate() {
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < 700 * 2) {
-                this.moveRight();
-                this.otherDirection = false;
-                walkingSound.play()
-            }
+            setInterval(() => {
+                if (this.world.keyboard.RIGHT && this.x < 700 * 2) {
+                    this.moveRight();
+                    this.otherDirection = false;
+                    walkingSound.play()
+                }
 
-            if (this.world.keyboard.LEFT && this.x > -520) {
-                this.moveLeft();
-                this.otherDirection = true;
-                walkingSound.play()
-            }
+                if (this.world.keyboard.LEFT && this.x > -520) {
+                    this.moveLeft();
+                    this.otherDirection = true;
+                    walkingSound.play()
+                }
 
-            if (this.world.keyboard.UP && !this.isAboveGround()) {
-                this.jump();
-                jumpingSound.play()
-            }
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60)
+                if (this.world.keyboard.UP && !this.isAboveGround()) {
+                    this.jump();
+                    jumpingSound.play()
+                }
+                this.world.camera_x = -this.x + 100;
+            }, 1000 / 60)
 
         setInterval(() => {
 

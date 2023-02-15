@@ -42,6 +42,7 @@ canvas {
     right: -330px;
     top: 20px;
     cursor: pointer;
+    height: 40px;
 }
 
 .play-button {
@@ -76,11 +77,38 @@ canvas {
     z-index: 2;
     font-size: 26px;
     letter-spacing: normal;
-    left: -325px;
-    top: 64px;
+    left: -309px;
+    top: 42px;
 }
 
+.game-over {
+    z-index: 3;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 480px;
+    width: 720px;
+    border-radius: 10px;
+    display: none;
+}
 
+.new-game {
+    position: absolute;
+    z-index: 4;
+    cursor: pointer;
+    font-size: 35px;
+    white-space: nowrap;
+    border-radius: 10px;
+    border: 7px solid #9A3916;
+    text-align: center;
+    left: 50%;
+    top: 58px;
+    transform: translate(-50%, 0);
+    padding: 10px 20px;
+    letter-spacing: 7px;
+    color: #FFA000;
+    display: none;
+}
 
 
 @media only screen and (max-width:720px) {
