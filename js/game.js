@@ -9,6 +9,7 @@ let collectItemSound = new Audio('audio/collect.mp3');
 let throwBottleSound = new Audio ('audio/throw.mp3');
 let bottleSplashSound = new Audio('audio/bottle-splash.mp3');
 let deadChickenSound = new Audio('audio/chicken.mp3');
+let charakterHurtSound = new Audio('audio/hurt.mp3')
 
 
 function init() {
@@ -59,6 +60,7 @@ window.addEventListener('keyup', (e) => {
 function startGame() {
     document.getElementById('play-button').style.display = "none";
     document.getElementById('start-picture').style.display = "none";
+    document.getElementById('game-info').style.display = "none";
     startLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -72,6 +74,7 @@ function mutePage() {
     collectItemSound.muted = !collectItemSound.muted
     throwBottleSound.muted = !throwBottleSound.muted
     deadChickenSound.muted =!deadChickenSound.muted
+    charakterHurtSound.muted = !charakterHurtSound.muted
     muted = !muted;
     toggleSound();
 }

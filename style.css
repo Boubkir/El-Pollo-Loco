@@ -71,7 +71,7 @@ canvas {
     gap: 6px;
 }
 
-.play-info {
+.game-info {
     position: absolute;
     z-index: 2;
     font-size: 26px;

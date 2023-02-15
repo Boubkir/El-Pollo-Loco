@@ -90,6 +90,7 @@ class Character extends MovableObjects {
         setInterval(() => {
 
             if (this.isHurt()) {
+                charakterHurtSound.play()
                 this.playAnimation(this.IMAGES_HURT)
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD)

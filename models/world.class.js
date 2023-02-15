@@ -3,6 +3,7 @@ class World {
     level = level1;
     clouds = level1.clouds;
     enemies = level1.enemies;
+    endboss = level1.endboss;
     backgroundObjects = level1.backgroundObjects;
     canvas;
     ctx;
@@ -15,6 +16,8 @@ class World {
     coin = new Coin();
     bottle = new Bottle();
     heart = new Heart();
+    throw = true;
+    collect = true;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -47,10 +50,10 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         gameSound.play()
-
 
         requestAnimationFrame(function () {
             self.draw();
@@ -95,7 +98,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemys) => {
-            if (this.character.isColliding(enemys)) {
+            if (this.character.isColliding(enemys) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy)
             }
@@ -154,24 +157,28 @@ class World {
             this.checkBottleHitChicken();
             this.checkIfJumpOnChicken();
             this.collectHeart();
-        }, 100)
+        }, 1000 / 60)
     }
 
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE && this.character.bottles > 0) {
+        if (this.keyboard.SPACE && this.character.bottles > 0 && this.throw) {
             let bottle = new ThrowableObjects(this.character.x + 60, this.character.y + 100)
             this.throwableObjects.push(bottle)
             this.character.bottles -= 10;
             throwBottleSound.play()
+            this.throw = false;
             this.statusBottleBar.setPercentage(this.character.bottles)
+            setTimeout(() => {
+                this.throw = true;
+            }, 250)
         }
     }
 
     checkBottleHitChicken() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemys) => {
-                if (bottle.isColliding(enemys)) {
+                if (bottle.isColliding(enemys) || this instanceof Chicken) {
                     bottleSplashSound.play();
                     deadChickenSound.play();
                     enemys.killObject()

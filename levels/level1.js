@@ -4,9 +4,11 @@ function startLevel() {
   level1 = new Level(
     [
       new Chicken(),
+      new Chick(),
+      new Chick(),
       new Chicken(),
+      new Chick(),
       new Chicken(),
-      new Endboss()
     ],
     [
       new Cloud('../img/5_background/layers/4_clouds/1.png'),
@@ -55,6 +57,8 @@ function startLevel() {
       new Heart(),
       new Heart(),
       new Heart()
+    ],[
+      new Endboss()
     ]
 
   )
