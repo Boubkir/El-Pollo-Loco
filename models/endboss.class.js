@@ -1,12 +1,13 @@
 class Endboss extends MovableObjects {
   currentImage = 0;
-  x = 1000;
+  x = 700 *8.5;
   y = 75;
   width = 300;
-  height = 400;
+  height = 350;
   firstContact = false;
   speed = 20;
   speedAfterHit = 30;
+  energy = 100;
   IMAGES_WALKING = [
     'img/4_enemie_boss_chicken/1_walk/G1.png',
     'img/4_enemie_boss_chicken/1_walk/G2.png',
@@ -49,10 +50,10 @@ class Endboss extends MovableObjects {
   ];
 
   offset = {
-    top: 50,
-    left: 10,
-    right: 20,
-    bottom: 60,
+    top: 100,
+    bottom: 50,
+    left: 40,
+    right: 40,
   }
 
 
@@ -73,12 +74,12 @@ class Endboss extends MovableObjects {
 
 
   fight() {
-    return world.character.x > world.level.endboss[0].x - 1000;
+    return world.character.x > world.level.endboss[0].x - 500;
   }
 
 
   rush() {
-    let increaseSpeed = world.level.endboss[0].x -= this.speedAferHit;
+    let increaseSpeed = world.level.endboss[0].x -= this.speedAfterHit;
     return increaseSpeed;
   }
 
@@ -90,18 +91,19 @@ class Endboss extends MovableObjects {
       if (this.reached()) {
         i = 0;
         this.firstContact = true;
+        
         // this.playBackgroundMusicEndboss();
       }
-    }, 200);
+    }, 120);
   }
 
   logicEndboss(i) {
     if (i < 15) {
       this.playAnimation(this.IMAGES_ALERT);
-    } else if (!this.isDead() && !this.isHurt() && this.fight()) {
+    } else if (!this.isDead() && !this.isHurtEndboss() && this.fight()) {
       this.playAnimation(this.IMAGES_WALKING);
       this.moveLeft()
-    } else if (this.isHurt()) {
+    } else if (this.isHurtEndboss()) {
       this.playAnimation(this.IMAGES_ATTACK);
       this.rush();
     } else if (this.isDead()) {

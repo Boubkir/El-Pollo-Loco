@@ -41,11 +41,9 @@ class ThrowableObjects extends MovableObjects {
   animate() {
 
     let throwAnimation = setInterval(() => {
-      if (this.y >= 325) {
+      if (world.level.endboss[0].isHurtEndboss()) {
         bottleSplashSound.play()
         this.playAnimation(this.IMAGES_SPLASH)
-        this.y = 350;
-        bottleSplashSound.play()
         clearInterval(throwAnimation)
       } else {
         this.playAnimation(this.IMAGES_ROTATE)

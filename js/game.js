@@ -87,6 +87,18 @@ function toggleSound(){
     }
 }
 
+function muteAll(){
+    walkingSound.muted;
+    jumpingSound.muted;
+    gameSound.muted;
+    collectItemSound.muted;
+    throwBottleSound.muted;
+    bottleSplashSound.muted;
+    deadChickenSound.muted;
+    charakterHurtSound.muted;
+
+}
+
 
 function restartGame(){
     document.getElementById('game-over').style.display = "none";

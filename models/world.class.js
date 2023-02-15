@@ -9,10 +9,12 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
     throwableObjects = []
+    statusBar = new StatusBar();
     statusBottleBar = new StatusBottleBar();
     statusCoinBar = new StatusCoinBar();
+    statusEndbossBar = new StatusBarEndboss();
+    endbossIcon = new EndbossIcon()
     coin = new Coin();
     bottle = new Bottle();
     heart = new Heart();
@@ -51,6 +53,9 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBottleBar);
         this.addToMap(this.statusCoinBar);
+        this.addToMap(this.statusEndbossBar);
+        this.addToMap(this.endbossIcon);
+
     }
 
 
@@ -84,12 +89,11 @@ class World {
 
     gameOver() {
         if (this.character.energy == 0) {
-            
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.clearAllIntervals()
                 document.getElementById('game-over').style.display = "flex";
                 document.getElementById('new-game').style.display = "flex";
-            },1600)
+            }, 1600)
         }
     }
 
@@ -134,6 +138,18 @@ class World {
             }
         })
     }
+
+
+
+    checkCollisionsEndboss() {
+        this.level.endboss.forEach(endboss => {
+            if (this.character.isColliding(endboss)) {
+                this.character.hit();
+                this.statusbarHealth.setPercentage(this.character.energy);
+            }
+        });
+    }
+
 
 
     collectBottle() {
@@ -192,7 +208,8 @@ class World {
         }, 1000 / 60)
         setInterval(() => {
             this.checkCollisions();
-        }, 200)
+            this.checkCollisionWithBottleEndboss();
+        }, 300)
     }
 
 
@@ -227,6 +244,16 @@ class World {
     }
 
 
+    checkBottleHitEndboss() {
+        this.throwableObjects.forEach((bottle) => {
+            if (bottle.isColliding(world.level.endboss[0])) {
+                world.level.endboss[0].energy = 100;
+            }
+        })
+    }
+
+
+
     checkIfJumpOnChicken() {
         this.level.enemies.forEach((enemys) => {
             if (this.character.isColliding(enemys) && this.character.isAboveGround()) {
@@ -244,5 +271,24 @@ class World {
     deleteObjectFromArray(array, object) {
         let i = array.indexOf(object);
         array.splice(i, 1);
+    }
+
+
+    checkCollisionWithBottleEndboss() {
+        this.throwableObjects.forEach((bottle) => {
+            if (bottle.isColliding(world.level.endboss[0])) {
+                world.level.endboss[0].hit();
+                // this.playSoundEnbossHit();
+                this.statusEndbossBar.setPercentage(world.level.endboss[0].energy);
+                setTimeout(() => {
+                    this.deleteBottleFromArray(bottle);
+                }, 180);
+            }
+        });
+    }
+
+    deleteBottleFromArray(bottle) {
+        let i = this.throwableObjects.indexOf(bottle);
+        this.throwableObjects.splice(i, 1);
     }
 }

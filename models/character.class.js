@@ -68,7 +68,7 @@ class Character extends MovableObjects {
 
     animate() {
             setInterval(() => {
-                if (this.world.keyboard.RIGHT && this.x < 700 * 2) {
+                if (this.world.keyboard.RIGHT && this.x < 700 * 8) {
                     this.moveRight();
                     this.otherDirection = false;
                     walkingSound.play()
@@ -88,7 +88,6 @@ class Character extends MovableObjects {
             }, 1000 / 60)
 
         setInterval(() => {
-
             if (this.isHurt()) {
                 charakterHurtSound.play()
                 this.playAnimation(this.IMAGES_HURT)

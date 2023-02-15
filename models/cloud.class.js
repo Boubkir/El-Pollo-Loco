@@ -7,7 +7,7 @@ class Cloud extends MovableObjects {
 
   constructor(path) {
     super().loadImage(path)
-    this.x = Math.random() * 1000;
+    this.x = 400 + Math.random() * 500 * 8;
     this.moveLeft();
     this.animate();
   }

@@ -122,8 +122,15 @@ canvas {
 
     .start-screen {
         width: 100%;
-        height: auto;
 
+    }
+
+    .info{
+        display: none;
+    }
+
+    .game-over{
+        width: 100%;
     }
 }
 
