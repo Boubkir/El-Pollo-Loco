@@ -6,10 +6,11 @@ let walkingSound = new Audio('audio/walking.mp3');
 let jumpingSound = new Audio('audio/jump.mp3');
 let gameSound = new Audio('audio/game.mp3');
 let collectItemSound = new Audio('audio/collect.mp3');
-let throwBottleSound = new Audio ('audio/throw.mp3');
+let throwBottleSound = new Audio('audio/throw.mp3');
 let bottleSplashSound = new Audio('audio/bottle-splash.mp3');
 let deadChickenSound = new Audio('audio/chicken.mp3');
 let charakterHurtSound = new Audio('audio/hurt.mp3')
+let endbossSound = new Audio('audio/endboss.mp3')
 
 
 function init() {
@@ -58,9 +59,11 @@ window.addEventListener('keyup', (e) => {
 });
 
 function startGame() {
+    gameSound.volume = 0.5;
     document.getElementById('play-button').style.display = "none";
     document.getElementById('start-picture').style.display = "none";
     document.getElementById('game-info').style.display = "none";
+    document.getElementById('you-win').style.display = "none";
     startLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -73,34 +76,22 @@ function mutePage() {
     gameSound.muted = !gameSound.muted
     collectItemSound.muted = !collectItemSound.muted
     throwBottleSound.muted = !throwBottleSound.muted
-    deadChickenSound.muted =!deadChickenSound.muted
+    deadChickenSound.muted = !deadChickenSound.muted
     charakterHurtSound.muted = !charakterHurtSound.muted
     muted = !muted;
     toggleSound();
 }
 
-function toggleSound(){
-    if(muted){
+function toggleSound() {
+    if (muted) {
         document.getElementById('audio-button').src = 'img/icons/audio.png';
-    }else{
+    } else {
         document.getElementById('audio-button').src = 'img/icons/muted.png';
     }
 }
 
-function muteAll(){
-    walkingSound.muted;
-    jumpingSound.muted;
-    gameSound.muted;
-    collectItemSound.muted;
-    throwBottleSound.muted;
-    bottleSplashSound.muted;
-    deadChickenSound.muted;
-    charakterHurtSound.muted;
 
-}
-
-
-function restartGame(){
+function restartGame() {
     document.getElementById('game-over').style.display = "none";
     document.getElementById('new-game').style.display = "none";
     document.getElementById('game-info').style.display = "flex";

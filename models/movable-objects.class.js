@@ -14,9 +14,7 @@ class MovableObjects extends DrawableObjects {
         right: 0
     }
 
-
-
-
+    
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,6 +22,22 @@ class MovableObjects extends DrawableObjects {
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25)
+    }
+
+
+    youWin() {
+        endbossSound.volume = 0;
+        gameSound.volume = 0;
+        document.getElementById('you-win').style.display = "flex";
+        world.clearAllIntervals()
+    }
+
+    gameOver() {
+            endbossSound.volume = 0;
+            gameSound.volume = 0;
+            world.clearAllIntervals()
+            document.getElementById('game-over').style.display = "flex";
+            document.getElementById('new-game').style.display = "flex";
     }
 
 

@@ -1,12 +1,12 @@
 class Endboss extends MovableObjects {
   currentImage = 0;
-  x = 700 *8.5;
-  y = 75;
+  x = 5950;
+  y = 85;
   width = 300;
   height = 350;
   firstContact = false;
   speed = 20;
-  speedAfterHit = 30;
+  speedAfterHit = 80;
   energy = 100;
   IMAGES_WALKING = [
     'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -69,12 +69,12 @@ class Endboss extends MovableObjects {
 
 
   reached() {
-    return world.character.x > 300 && !this.firstContact;
+    return world.character.x > 5150 && !this.firstContact;
   }
 
 
   fight() {
-    return world.character.x > world.level.endboss[0].x - 500;
+    return world.character.x > world.level.endboss[0].x - 2000;
   }
 
 
@@ -91,8 +91,9 @@ class Endboss extends MovableObjects {
       if (this.reached()) {
         i = 0;
         this.firstContact = true;
-        
-        // this.playBackgroundMusicEndboss();
+        gameSound.volume = 0;
+        endbossSound.volume = 0.5;
+        endbossSound.play();
       }
     }, 120);
   }
@@ -106,11 +107,13 @@ class Endboss extends MovableObjects {
     } else if (this.isHurtEndboss()) {
       this.playAnimation(this.IMAGES_ATTACK);
       this.rush();
+    }else if(this.x <= 100){
+      this.gameOver();
     } else if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       setTimeout(() => {
-        // this.wonGame();
-      }, 350);
+        this.youWin()
+      }, 500);
     }
   }
 }

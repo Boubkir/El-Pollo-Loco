@@ -41,6 +41,9 @@ class Chick extends MovableObjects {
       } else {
         this.loadImage(this.IMAGES_DEATH)
         clearInterval(movingChickInverval)
+        setTimeout(() => {
+          this.x = -2000
+        }, 400)
       }
     }, 100);
   }

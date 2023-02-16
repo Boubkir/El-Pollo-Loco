@@ -5,6 +5,10 @@ function startLevel() {
     [
       new Chicken(),
       new Chick(),
+      new Chicken(),
+      new Chick(),
+      new Chicken(),
+      new Chick(),
       new Chick(),
       new Chicken(),
       new Chick(),

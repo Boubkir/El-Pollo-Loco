@@ -41,6 +41,9 @@ class Chicken extends MovableObjects {
             } else {
                 this.loadImage(this.IMAGES_DEATH)
                 clearInterval(movingChickenInverval)
+                setTimeout(()=>{
+                    this.x = -2000
+                },400)
             }
         }, 100);
     }

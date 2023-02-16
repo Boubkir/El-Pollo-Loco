@@ -10,7 +10,7 @@ class Character extends MovableObjects {
         left: 35,
         right: 35,
     }
-    bottles = 100;
+    bottles = 0;
     energy = 100;
 
     IMAGES_WALKING = [
@@ -93,6 +93,9 @@ class Character extends MovableObjects {
                 this.playAnimation(this.IMAGES_HURT)
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD)
+                setTimeout(()=>{
+                    this.gameOver()
+                },1600)
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING)
             } else {

@@ -5,11 +5,14 @@ body {
     align-items: center;
     background-image: url('../img/5_background/layers/desert.jpg');
     background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 45px;
     letter-spacing: 16px;
+    overflow: hidden;
+    height: 100vh;
+
 }
 
 canvas {
@@ -110,27 +113,77 @@ canvas {
     display: none;
 }
 
+.you-win {
+    position: absolute;
+    background-color: wheat;
+    z-index: 3;
+    width: 720px;
+    height: 480px;
+    z-index: 2;
+    border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: #FFA000;
+    letter-spacing: 6px;
+    display: none;
+}
+
+.you-won-text {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+    top: 40px;
+}
+
+.win-new-game {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer;
+}
+
+
+.trophy {
+    position: absolute;
+    height: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 @media only screen and (max-width:720px) {
-    canvas {
+
+    canvas,
+    .canvas-div,
+    .start-screen,
+    .you-win,
+    .game-over {
         width: 100%;
+    }
+
+
+    .start-picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    .canvas-div {
+        height: 100vh;
+        display: flex;
+        align-items: center;
     }
 
     h1 {
         display: none;
     }
 
-    .start-screen {
-        width: 100%;
-
-    }
-
-    .info{
+    .info {
         display: none;
-    }
-
-    .game-over{
-        width: 100%;
     }
 }
 
