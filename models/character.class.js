@@ -12,7 +12,6 @@ class Character extends MovableObjects {
     }
     bottles = 0;
     energy = 50;
-
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -21,7 +20,6 @@ class Character extends MovableObjects {
         'img/2_character_pepe/2_walk/W-25.png',
         'img/2_character_pepe/2_walk/W-26.png'
     ]
-
     IMAGES_JUMPING = [
         'img/2_character_pepe/3_jump/J-31.png',
         'img/2_character_pepe/3_jump/J-32.png',
@@ -33,8 +31,6 @@ class Character extends MovableObjects {
         'img/2_character_pepe/3_jump/J-38.png',
         'img/2_character_pepe/3_jump/J-39.png'
     ]
-
-
     IMAGES_DEAD = [
         'img/2_character_pepe/5_dead/D-51.png',
         'img/2_character_pepe/5_dead/D-52.png',
@@ -51,10 +47,9 @@ class Character extends MovableObjects {
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png'
     ]
-
-
     currentImage = 0;
     world;
+
 
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png')
@@ -66,10 +61,12 @@ class Character extends MovableObjects {
         this.applyGravity();
     }
 
+
     animate() {
-            setInterval(() => {
-                this.charakterMovingLogic();
-            }, 1000 / 60)
+        setInterval(() => {
+            this.charakterMovingLogic();
+        }, 1000 / 60)
+
 
         setInterval(() => {
             this.characterPictureLogic();
@@ -77,7 +74,7 @@ class Character extends MovableObjects {
     }
 
 
-    charakterMovingLogic(){
+    charakterMovingLogic() {
         if (this.world.keyboard.RIGHT && this.x < 710 * 8) {
             this.charakterMovesRight()
         }
@@ -91,7 +88,7 @@ class Character extends MovableObjects {
     }
 
 
-    characterPictureLogic(){
+    characterPictureLogic() {
         if (this.isHurt()) {
             charakterHurtSound.play()
             this.playAnimation(this.IMAGES_HURT)
@@ -110,20 +107,21 @@ class Character extends MovableObjects {
     }
 
 
-
-    charakterMovesRight(){
+    charakterMovesRight() {
         this.moveRight();
         this.otherDirection = false;
         walkingSound.play()
     }
 
-    charakterMovesleft(){
+
+    charakterMovesleft() {
         this.moveLeft();
         this.otherDirection = true;
         walkingSound.play()
     }
 
-    charakterJump(){
+    
+    charakterJump() {
         this.jump();
         jumpingSound.play()
     }

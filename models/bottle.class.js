@@ -20,6 +20,4 @@ class Bottle extends MovableObjects {
     this.x = 400 + Math.random() * 500 * 8;
     this.height = 100;
   }
-
-
 }

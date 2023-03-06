@@ -7,7 +7,6 @@ class Chicken extends MovableObjects {
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ]
-
     IMAGES_DEATH = [
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ]
@@ -34,19 +33,22 @@ class Chicken extends MovableObjects {
         let movingChickenInverval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-
+        
         setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING)
             } else {
-                this.loadImage(this.IMAGES_DEATH)
-                clearInterval(movingChickenInverval)
-                setTimeout(()=>{
-                    this.x = -2000
-                },400)
+                this.chickenDeadLogic(movingChickenInverval);
             }
         }, 100);
     }
 
 
+    chickenDeadLogic(movingChickenInverval){
+        this.loadImage(this.IMAGES_DEATH)
+        clearInterval(movingChickenInverval)
+        setTimeout(() => {
+            this.x = -2000
+        }, 400)
+    }
 }

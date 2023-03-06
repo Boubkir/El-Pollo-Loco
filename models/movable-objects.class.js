@@ -21,7 +21,7 @@ class MovableObjects extends DrawableObjects {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25)
+        }, 1000 / 30)
     }
 
 
@@ -97,13 +97,6 @@ class MovableObjects extends DrawableObjects {
         if (this.bottles < 0) {
             this.bottles = 0
         }
-    }
-
-
-    isHurtEndboss() {
-        let timepassed = new Date().getTime() - this.lastHit;
-        timepassed = timepassed / 1000;
-        return timepassed < 0.5;
     }
 
     

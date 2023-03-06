@@ -17,5 +17,4 @@ class Level{
     this.heart = heart;
     this.endboss = endboss;
   }
-
 }

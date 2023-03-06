@@ -1,5 +1,6 @@
 let level1;
 
+
 function startLevel() {
   level1 = new Level(
     [
@@ -59,7 +60,6 @@ function startLevel() {
       new BackgroundObject('../img/5_background/layers/3_third_layer/1.png', 719 * 8),
       new BackgroundObject('../img/5_background/layers/2_second_layer/1.png', 719 * 8),
       new BackgroundObject('../img/5_background/layers/1_first_layer/1.png', 719 * 8),
-
     ],
     [
       new Coin(),
@@ -89,6 +89,5 @@ function startLevel() {
     ], [
     new Endboss()
   ]
-
   )
 }

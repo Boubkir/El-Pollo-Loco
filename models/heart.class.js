@@ -16,6 +16,4 @@ class Heart extends MovableObjects {
     this.x = 400 + Math.random() * 500 * 8;
     this.y = 350 - Math.random() * 350;
   }
-
-
 }

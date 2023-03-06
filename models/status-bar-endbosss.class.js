@@ -3,8 +3,6 @@ class StatusBarEndboss extends DrawableObjects {
   y = 70;
   width = 200;
   height = 60;
-
-
   IMAGES = [
     'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
     'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
@@ -13,8 +11,6 @@ class StatusBarEndboss extends DrawableObjects {
     'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
     'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
   ]
-
-
   percentage = 100;
 
 

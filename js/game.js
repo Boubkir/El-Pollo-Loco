@@ -13,24 +13,22 @@ let charakterHurtSound = new Audio('audio/hurt.mp3')
 let endbossSound = new Audio('audio/endboss.mp3')
 
 
-function init() {
-
-}
-
-
-
-
-
 function startGame() {
     gameSound.volume = 0.5;
-    document.getElementById('play-button').style.display = "none";
-    document.getElementById('start-picture').style.display = "none";
-    document.getElementById('game-info').style.display = "none";
-    document.getElementById('you-win').style.display = "none";
+    hideStartScreen()
     startLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
+
+
+function hideStartScreen(){
+    document.getElementById('play-button').style.display = "none";
+    document.getElementById('start-picture').style.display = "none";
+    document.getElementById('game-info').style.display = "none";
+    document.getElementById('you-win').style.display = "none";
+}
+
 
 function mutePage() {
     walkingSound.muted = !walkingSound.muted
@@ -45,6 +43,7 @@ function mutePage() {
     muted = !muted;
     toggleSound();
 }
+
 
 function toggleSound() {
     if (muted) {
