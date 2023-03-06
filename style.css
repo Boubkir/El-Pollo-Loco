@@ -153,6 +153,21 @@ canvas {
     transform: translate(-50%, -50%);
 }
 
+.touch-keys {
+    position: absolute;
+    width: 720px;
+        left: -361px;
+        bottom: -475px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.flex{
+    display: flex;
+}
+
 
 @media only screen and (max-width:720px) {
 

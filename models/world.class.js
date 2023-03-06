@@ -53,8 +53,9 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBottleBar);
         this.addToMap(this.statusCoinBar);
-        this.addToMap(this.statusEndbossBar);
         this.addToMap(this.endbossIcon);
+        this.addToMap(this.statusEndbossBar);
+
     }
 
 
