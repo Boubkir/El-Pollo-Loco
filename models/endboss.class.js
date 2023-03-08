@@ -98,10 +98,10 @@ class Endboss extends MovableObjects {
   logicEndboss(i) {
     if (i < 15) {
       this.playAnimation(this.IMAGES_ALERT);
-    } else if (!this.isDead() && !this.isHurtEndboss() && this.fight()) {
+    } else if (!this.isDead() && !this.isHurt() && this.fight()) {
       this.playAnimation(this.IMAGES_WALKING);
       this.moveLeft()
-    } else if (this.isHurtEndboss()) {
+    } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_ATTACK);
       this.rush();
     }else if(this.x <= 100){

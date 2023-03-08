@@ -90,6 +90,7 @@ class Character extends MovableObjects {
 
     characterPictureLogic() {
         if (this.isHurt()) {
+            charakterHurtSound.volume = 0.5;
             charakterHurtSound.play()
             this.playAnimation(this.IMAGES_HURT)
         } else if (this.isDead()) {

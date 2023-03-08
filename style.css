@@ -3,16 +3,46 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('../img/5_background/layers/desert.jpg');
+    background-image: url('./img/5_background/layers/desert.jpg');
     background-position: center;
     background-size: cover;
     color: white;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 45px;
     letter-spacing: 16px;
-    overflow: hidden;
     height: 100vh;
+    user-select: none;
+}
 
+h1 {
+    margin: 20px 0;
+}
+
+.info {
+    display: flex;
+    width: 720px;
+    justify-content: center;
+    font-size: 24px;
+    letter-spacing: normal;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.turn-device-container {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    max-width: 720px;
+    margin-bottom: 20px;
+    gap: 20px;
+    letter-spacing: 1vw;
+    color: black;
+}
+
+.turn-device-container img {
+    max-height: 100px;
+    height: 19vw;
 }
 
 canvas {
@@ -20,59 +50,74 @@ canvas {
     display: block;
     border-radius: 10px;
     box-shadow: 0px 0 10px 10px rgba(0, 0, 0, 0.5);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
 }
 
 .canvas-div {
     position: relative;
 }
 
+.start-container {
+    position: relative;
+}
+
 .start-picture {
     position: absolute;
-    width: 720px;
-    height: 480px;
+    max-width: 720px;
+    max-height: 480px;
+    height: 67vw;
+    width: 100vw;
     z-index: 1;
     border-radius: 10px;
+}
+
+.you-win-container {
+    position: absolute;
+    top: 0;
+    display: none;
+    animation: scale-in 225ms cubic-bezier(0.250, 0.460, 0.450, 0.940) 100ms both;
+}
+
+.you-win-picture {
+    max-width: 720px;
+    max-height: 480px;
+    height: 67vw;
+    width: 100vw;
+    z-index: 1;
+    border-radius: 10px;
+    object-fit: cover;
+    background-color: wheat;
+}
+
+.you-win-text {
+    position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+    white-space: nowrap;
+    top: 12%;
+    font-size: 96%;
+    z-index: 2;
+    color: orange;
 }
 
-.audio-button {
+.trophy {
     position: absolute;
-    z-index: 2;
-    right: -330px;
-    top: 20px;
-    cursor: pointer;
-    height: 40px;
+    height: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
-.play-button {
+.win-new-game {
     position: absolute;
-    z-index: 2;
-    height: 132px;
+    bottom: 12%;
     left: 50%;
     transform: translate(-50%, 0);
     cursor: pointer;
-}
-
-.info {
-    position: absolute;
+    font-size: 96%;
+    white-space: nowrap;
     z-index: 2;
-    display: flex;
-    top: -61px;
-    left: -348px;
-    font-size: 24px;
-    letter-spacing: normal;
-    gap: 20px;
-    width: 720px;
-}
-
-.info span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    color: orange;
 }
 
 .game-info {
@@ -80,19 +125,25 @@ canvas {
     z-index: 2;
     font-size: 26px;
     letter-spacing: normal;
-    left: -309px;
+    left: 45px;
     top: 42px;
 }
 
-.game-over {
-    z-index: 3;
+.game-over-container {
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    height: 480px;
-    width: 720px;
-    border-radius: 10px;
+    top: 0;
     display: none;
+    animation: scale-in 225ms cubic-bezier(0.250, 0.460, 0.450, 0.940) 100ms both;
+}
+
+.game-over {
+    max-width: 720px;
+    max-height: 480px;
+    height: 67vw;
+    width: 100vw;
+    z-index: 1;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .new-game {
@@ -110,87 +161,106 @@ canvas {
     padding: 10px 20px;
     letter-spacing: 7px;
     color: #FFA000;
-    display: none;
 }
 
-.you-win {
+.audio-button {
     position: absolute;
-    background-color: wheat;
     z-index: 3;
-    width: 720px;
-    height: 480px;
+    right: 10%;
+    top: 3%;
+    cursor: pointer;
+    max-height: 40px;
+    height: 5vw;
+}
+
+.full-screen-button {
+    position: absolute;
+    top: 3%;
+    z-index: 3;
+    right: 3%;
+    max-height: 40px;
+    height: 5vw;
+    cursor: pointer;
+}
+
+.play-button {
+    position: absolute;
     z-index: 2;
-    border-radius: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: #FFA000;
-    letter-spacing: 6px;
-    display: none;
-}
-
-.you-won-text {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    white-space: nowrap;
-    top: 40px;
-}
-
-.win-new-game {
-    position: absolute;
-    bottom: 6px;
+    max-height: 132px;
+    height: 19vw;
     left: 50%;
     transform: translate(-50%, 0);
     cursor: pointer;
 }
 
 
-.trophy {
+.info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+.touch-keys-left {
     position: absolute;
-    height: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 10px;
+    bottom: -5px;
+}
+
+.touch-keys-right {
+    position: absolute;
+    right: 10px;
+    bottom: -5px;
 }
 
 .touch-keys {
-    position: absolute;
-    width: 720px;
-        left: -361px;
-        bottom: -475px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    z-index: 2;
-}
-
-.flex{
-    display: flex;
+    width: 6vw;
+    max-width: 46px;
+    display: none;
 }
 
 
-@media only screen and (max-width:720px) {
+.full-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+@media only screen and (hover: none) and (pointer: coarse) {
+    .touch-keys {
+        display: unset;
+    }
+
+    .info {
+        display: none;
+    }
 
     canvas,
     .canvas-div,
-    .start-screen,
-    .you-win,
-    .game-over {
-        width: 100%;
+    .start-picture,
+    .game-over,
+    .you-win-picture {
+        width: 100vw;
+    }
+}
+
+@media only screen and (max-width:720px) {
+    body {
+        justify-content: center;
     }
 
+    .turn-device-container {
+        font-size: 5vw;
+        gap: 3vw;
+        display: flex;
+    }
+
+    canvas {
+        width: 100%;
+        height: unset;
+    }
 
     .start-picture {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
-    }
-
-
-    .canvas-div {
-        height: 100vh;
-        display: flex;
-        align-items: center;
     }
 
     h1 {
@@ -199,6 +269,31 @@ canvas {
 
     .info {
         display: none;
+    }
+
+    .touch-keys {
+        display: unset;
+    }
+
+    .game-info {
+        font-size: 3.4vw;
+        left: 10%;
+        top: 4vw;
+    }
+
+    .you-win-text,
+    .win-new-game {
+        font-size: 3.4vw;
+        letter-spacing: 1vh;
+    }
+
+    .new-game {
+        font-size: 5vw;
+        border-radius: 1vw;
+        border: 0.7vw solid #9A3916;
+        top: 10%;
+        padding: 1vw 2vw;
+        letter-spacing: 0.6vw;
     }
 }
 
@@ -209,5 +304,16 @@ canvas {
 
     h1 {
         display: none;
+    }
+}
+
+@keyframes scale-in {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }

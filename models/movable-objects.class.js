@@ -28,7 +28,7 @@ class MovableObjects extends DrawableObjects {
     youWin() {
         endbossSound.volume = 0;
         gameSound.volume = 0;
-        document.getElementById('you-win').style.display = "flex";
+        document.getElementById('you-win-container').style.display = "flex";
         world.clearAllIntervals()
     }
 
@@ -37,8 +37,7 @@ class MovableObjects extends DrawableObjects {
             endbossSound.volume = 0;
             gameSound.volume = 0;
             world.clearAllIntervals()
-            document.getElementById('game-over').style.display = "flex";
-            document.getElementById('new-game').style.display = "flex";
+            document.getElementById('game-over-container').style.display = "flex";
     }
 
 
