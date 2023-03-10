@@ -60,10 +60,11 @@ function restartGame() {
     document.getElementById('start-container').style.display = "flex";
 }
 
+
 function toggleFullScreen() {
     if (!fullScreen) {
         let elem = document.getElementById('canvas-div');
-        giveContainerFullSize();
+        setContainerSize();
         openFullscreen(elem);
         fullScreen = true;
     } else {
@@ -72,28 +73,20 @@ function toggleFullScreen() {
     }
 }
 
-function giveContainerFullSize(){
-    document.getElementById('canvas').classList.add('full-screen');
-    document.getElementById('canvas').classList.add('full-screen');
-    document.getElementById('start-picture').style.maxWidth = '100vw';
-    document.getElementById('start-picture').style.maxHeight = '100vh';
-    document.getElementById('game-over-picture').style.maxWidth = '100vw';
-    document.getElementById('game-over-picture').style.maxHeight = '100vh';
-    document.getElementById('win-picture').style.maxWidth = '100vw';
-    document.getElementById('win-picture').style.maxHeight = '100vh';
+
+function setContainerSize() {
+    const elements = ['canvas', 'start-picture', 'game-over-picture', 'win-picture'];
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = document.getElementById(elements[i]);
+        if (!fullScreen) {
+            element.classList.add('full-screen');
+        } else {
+            element.classList.remove('full-screen');
+        }
+    }
 }
 
-
-function giveContainerDefaultSize(){
-    document.getElementById('canvas').classList.remove('full-screen');
-    document.getElementById('canvas').classList.remove('full-screen');
-    document.getElementById('start-picture').style.maxWidth = '720px';
-    document.getElementById('start-picture').style.maxHeight = '480px';
-    document.getElementById('game-over-picture').style.maxWidth = '720px';
-    document.getElementById('game-over-picture').style.maxHeight = '480px';
-    document.getElementById('win-picture').style.maxWidth = '480px';
-    document.getElementById('win-picture').style.maxHeight = '720px';
-}
 
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
@@ -107,7 +100,7 @@ function openFullscreen(elem) {
 
 
 function closeFullscreen() {
-    giveContainerDefaultSize();
+    setContainerSize();
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
@@ -116,4 +109,3 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
-

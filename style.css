@@ -62,10 +62,8 @@ canvas {
 
 .start-picture {
     position: absolute;
-    max-width: 720px;
-    max-height: 480px;
-    height: 67vw;
-    width: 100vw;
+    width: 720px;
+    height: 480px;
     z-index: 1;
     border-radius: 10px;
 }
@@ -78,10 +76,8 @@ canvas {
 }
 
 .you-win-picture {
-    max-width: 720px;
-    max-height: 480px;
-    height: 67vw;
-    width: 100vw;
+    width: 720px;
+    height: 480px;
     z-index: 1;
     border-radius: 10px;
     object-fit: cover;
@@ -137,10 +133,8 @@ canvas {
 }
 
 .game-over {
-    max-width: 720px;
-    max-height: 480px;
-    height: 67vw;
-    width: 100vw;
+    width: 720px;
+    height: 480px;
     z-index: 1;
     border-radius: 10px;
     object-fit: cover;
@@ -240,6 +234,28 @@ canvas {
     .game-over,
     .you-win-picture {
         width: 100vw;
+        max-height: unset;
+        max-width: unset;
+    }
+}
+
+@media only screen and (max-height:480px) {
+
+    canvas,
+    .canvas-div,
+    .start-picture,
+    .game-over,
+    .you-win-picture {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .turn-device-container {
+        display: none;
     }
 }
 
@@ -295,23 +311,22 @@ canvas {
         padding: 1vw 2vw;
         letter-spacing: 0.6vw;
     }
-}
 
-@media only screen and (max-height:480px) {
-    canvas {
-        height: 100vh;
-    }
-
-    h1 {
-        display: none;
+    .start-picture,
+    .you-win-picture,
+    .game-over {
+        height: 67vw;
+        width: 100vw;
     }
 }
+
 
 @keyframes scale-in {
     0% {
         transform: scale(0);
         opacity: 1;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;

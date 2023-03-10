@@ -17,6 +17,9 @@ function startLevel() {
     ],
     [
       new Cloud('./img/5_background/layers/4_clouds/1.png'),
+      new Cloud('./img/5_background/layers/4_clouds/2.png'),
+      new Cloud('./img/5_background/layers/4_clouds/2.png'),
+      new Cloud('./img/5_background/layers/4_clouds/2.png'),
       new Cloud('./img/5_background/layers/4_clouds/2.png')
     ],
     [
@@ -69,6 +72,8 @@ function startLevel() {
       new Coin(),
       new Coin(),
       new Coin(),
+      new Coin(),
+      new Coin(),
       new Coin()
     ],
     [
@@ -79,9 +84,13 @@ function startLevel() {
       new Bottle(),
       new Bottle(),
       new Bottle(),
+      new Bottle(),
+      new Bottle(),
       new Bottle()
     ],
     [
+      new Heart(),
+      new Heart(),
       new Heart(),
       new Heart(),
       new Heart(),

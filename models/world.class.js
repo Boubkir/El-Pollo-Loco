@@ -19,7 +19,8 @@ class World {
     bottle = new Bottle();
     heart = new Heart();
     throw = true;
-    collect = true;
+    endbossHurt = false;
+    coolDown = false;
 
 
     constructor(canvas, keyboard) {
@@ -54,9 +55,18 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBottleBar);
         this.addToMap(this.statusCoinBar);
-        this.addToMap(this.endbossIcon);
-        this.addToMap(this.statusEndbossBar);
+        if (this.level.endboss[0].firstContact) {
+            this.addToMap(this.statusEndbossBar);
+            this.addToMap(this.endbossIcon);
+        }
+    }
 
+
+    movableObjects(){
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.throwableObjects);
     }
 
 
@@ -68,10 +78,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.addStatusBars();
         this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.endboss);
+        this.movableObjects()
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         gameSound.play()
@@ -122,72 +129,85 @@ class World {
 
     checkCollisions(array) {
         array.forEach((enemie) => {
-            if (this.character.isColliding(enemie) && !this.character.isAboveGround()) {
+            if (this.character.isColliding(enemie) && !this.character.isAboveGround() && !this.coolDown) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy)
+                this.coolDown = true;
+                setTimeout(() => {
+                    this.coolDown = false;
+                }, 1000)
             }
         })
     }
 
 
-    // collectItem(array, characterItem, statusBar) {
-    //     array.forEach((item) => {
-    //         if (this.character.isColliding(item) && characterItem <= 100) {
-    //             characterItem += 10;
-    //             statusBar.setPercentage(characterItem)
-    //             let index = array.indexOf(item)
-    //             array.splice(index, 1)
+    collectItem(characterStat, levelArray, statusObject) {
+        levelArray.forEach((item) => {
+            if (this.character.isColliding(item) && characterStat <= 100) {
+                characterStat += 10;
+                statusObject.setPercentage(characterStat);
+                let index = levelArray.indexOf(item);
+                levelArray.splice(index, 1);
+                collectItemSound.play();
+            }
+        });
+    }
+
+    collectBottle() {
+        this.collectItem( this.character.bottles, this.level.bottle, this.statusBottleBar);
+    }
+
+    collectCoin() {
+        this.collectItem( this.character.coins, this.level.coin, this.statusCoinBar);
+    }
+
+    collectHeart() {
+        this.collectItem( this.character.energy, this.level.heart, this.statusBar);
+    }
+
+
+
+
+    // collectBottle() {
+    //     this.level.bottle.forEach((bottles) => {
+    //         if (this.character.isColliding(bottles) && this.character.bottles <= 100) {
+    //             this.character.bottles += 10;
+    //             this.statusBottleBar.setPercentage(this.character.bottles)
+    //             let index = this.level.bottle.indexOf(bottles)
+    //             this.level.bottle.splice(index, 1)
     //             collectItemSound.play()
     //         }
     //     })
     // }
 
 
-    collectBottle() {
-        this.level.bottle.forEach((bottles) => {
-            if (this.character.isColliding(bottles) && this.character.bottles <= 100) {
-                this.character.bottles += 10;
-                this.statusBottleBar.setPercentage(this.character.bottles)
-                let index = this.level.bottle.indexOf(bottles)
-                this.level.bottle.splice(index, 1)
-                collectItemSound.play()
-            }
-        })
-    }
+    // collectCoin() {
+    //     this.level.coin.forEach((coins) => {
+    //         if (this.character.isColliding(coins) && this.character.coins <= 100) {
+    //             this.character.coins += 10;
+    //             this.statusCoinBar.setPercentage(this.character.coins)
+    //             let index = this.level.coin.indexOf(coins)
+    //             this.level.coin.splice(index, 1)
+    //             collectItemSound.play()
+    //         }
+    //     })
+    // }
 
 
-
-
-    collectCoin() {
-        this.level.coin.forEach((coins) => {
-            if (this.character.isColliding(coins) && this.character.coins <= 100) {
-                this.character.coins += 10;
-                this.statusCoinBar.setPercentage(this.character.coins)
-                let index = this.level.coin.indexOf(coins)
-                this.level.coin.splice(index, 1)
-                collectItemSound.play()
-            }
-        })
-    }
-
-
-    collectHeart() {
-        this.level.heart.forEach((hearts) => {
-            if (this.character.isColliding(hearts) && this.character.energy <= 100) {
-                this.character.energy += 10;
-                this.statusBar.setPercentage(this.character.energy)
-                let index = this.level.heart.indexOf(hearts)
-                this.level.heart.splice(index, 1)
-                collectItemSound.play()
-            }
-        })
-    }
+    // collectHeart() {
+    //     this.level.heart.forEach((hearts) => {
+    //         if (this.character.isColliding(hearts) && this.character.energy <= 100) {
+    //             this.character.energy += 10;
+    //             this.statusBar.setPercentage(this.character.energy)
+    //             let index = this.level.heart.indexOf(hearts)
+    //             this.level.heart.splice(index, 1)
+    //             collectItemSound.play()
+    //         }
+    //     })
+    // }
 
 
     checkCollectItems() {
-        // this.collectItem(this.level.bottle, this.character.bottles, this.statusBottleBar) 
-        // this.collectItem(this.level.coin, this.character.coins, this.statusCoinBar) 
-        // this.collectItem(this.level.heart, this.character.energy, this.statusBar) 
         this.collectBottle();
         this.collectCoin();
         this.collectHeart();
@@ -200,12 +220,10 @@ class World {
             this.checkCollectItems();
             this.checkBottleHitChicken();
             this.checkIfJumpOnChicken();
-        }, 1000 / 60)
-        setInterval(() => {
             this.checkCollisions(this.level.endboss);
             this.checkCollisions(this.level.enemies);
             this.checkBottleHitEndboss();
-        }, 300)
+        }, 1000 / 60)
     }
 
 
@@ -214,12 +232,12 @@ class World {
             let bottle = new ThrowableObjects(this.character.x + 60, this.character.y + 100, this.character.otherDirection)
             this.throwableObjects.push(bottle)
             this.character.bottles -= 10;
+            this.statusBottleBar.setPercentage(this.character.bottles)
             throwBottleSound.play()
             this.throw = false;
-            this.statusBottleBar.setPercentage(this.character.bottles)
             setTimeout(() => {
                 this.throw = true;
-            }, 250)
+            }, 1000)
         }
     }
 
@@ -239,9 +257,9 @@ class World {
 
     checkIfJumpOnChicken() {
         this.level.enemies.forEach((enemys) => {
-            if (this.character.isColliding(enemys) && this.character.isAboveGround()) {
+            if (this.character.isColliding(enemys) && this.character.isAboveGround() && !this.character.isHurt()) {
                 enemys.killObject()
-                this.character.speedY = 30;
+                this.character.jump()
                 deadChickenSound.volume = 0.5;
                 deadChickenSound.play();
             }
@@ -251,21 +269,19 @@ class World {
 
     checkBottleHitEndboss() {
         this.throwableObjects.forEach((bottle) => {
-            if (bottle.isColliding(world.level.endboss[0])) {
+            if (bottle.isColliding(world.level.endboss[0]) && !this.endbossHurt) {
                 world.level.endboss[0].hit();
                 // this.playSoundEnbossHit();
                 this.statusEndbossBar.setPercentage(world.level.endboss[0].energy);
+                this.endbossHurt = true;
                 setTimeout(() => {
                     this.deleteBottleFromArray(bottle);
                 }, 180);
+                setTimeout(() => {
+                    this.endbossHurt = false;
+                }, 1000)
             }
         });
-    }
-
-
-    deleteObjectFromArray(array, object) {
-        let i = array.indexOf(object);
-        array.splice(i, 1);
     }
 
 
