@@ -87,15 +87,15 @@ class Character extends MovableObjects {
 
 
     characterPictureLogic() {
-        if (this.isHurt()) {
+        if (this.isHurt(1)) {
             charakterHurtSound.volume = 0.5;
             charakterHurtSound.play()
             this.playAnimation(this.IMAGES_HURT)
         } else if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD)
-            setTimeout(() => {
-                this.gameOver()
-            }, 1600)
+                setTimeout(() => {
+                    this.gameOver()
+                }, 1600)
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING)
         } else {
@@ -119,7 +119,7 @@ class Character extends MovableObjects {
         walkingSound.play()
     }
 
-    
+
     charakterJump() {
         this.jump();
         jumpingSound.play()

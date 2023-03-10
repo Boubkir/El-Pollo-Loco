@@ -88,13 +88,6 @@ class World {
     }
 
 
-    clearAllIntervals() {
-        for (let i = 1; i < 999; i++) {
-            window.clearInterval(i);
-        }
-    }
-
-
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo)
@@ -230,7 +223,7 @@ class World {
 
     checkIfJumpOnChicken() {
         this.level.enemies.forEach((enemys) => {
-            if (this.character.isColliding(enemys) && this.character.isAboveGround() && !this.character.isHurt()) {
+            if (this.character.isColliding(enemys) && this.character.isAboveGround() && !this.character.isHurt(1)) {
                 enemys.killObject()
                 this.character.jump()
                 deadChickenSound.volume = 0.5;

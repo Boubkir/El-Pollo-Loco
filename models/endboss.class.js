@@ -64,12 +64,12 @@ class Endboss extends MovableObjects {
 
 
   reached() {
-    return world.character.x > 5150 && !this.firstContact;
+    return world.character.x > 3000 && !this.firstContact;
   }
 
 
   fight() {
-    return world.character.x > world.level.endboss[0].x - 2000;
+    return world.character.x > world.level.endboss[0].x - 1000;
   }
 
 
@@ -94,23 +94,23 @@ class Endboss extends MovableObjects {
     }, 120);
   }
 
-  
+
   logicEndboss(i) {
     if (i < 15) {
       this.playAnimation(this.IMAGES_ALERT);
-    } else if (!this.isDead() && !this.isHurt() && this.fight()) {
+    } else if (!this.isDead() && !this.isHurt(0.5) && this.fight()) {
       this.playAnimation(this.IMAGES_WALKING);
       this.moveLeft()
-    } else if (this.isHurt()) {
+    } else if (this.isHurt(0.5)) {
       this.playAnimation(this.IMAGES_ATTACK);
       this.rush();
-    }else if(this.x <= 100){
+    } else if (this.x <= 100) {
       this.gameOver();
     } else if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       setTimeout(() => {
-        this.youWin()
+          this.youWin()
       }, 500);
-    }
   }
+}
 }

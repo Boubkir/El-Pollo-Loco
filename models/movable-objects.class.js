@@ -14,7 +14,7 @@ class MovableObjects extends DrawableObjects {
         right: 0
     }
 
-    
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -29,15 +29,15 @@ class MovableObjects extends DrawableObjects {
         endbossSound.volume = 0;
         gameSound.volume = 0;
         document.getElementById('you-win-container').style.display = "flex";
-        world.clearAllIntervals()
+        this.clearAllIntervals()
     }
 
 
     gameOver() {
-            endbossSound.volume = 0;
-            gameSound.volume = 0;
-            world.clearAllIntervals()
-            document.getElementById('game-over-container').style.display = "flex";
+        endbossSound.volume = 0;
+        gameSound.volume = 0;
+        this.clearAllIntervals()
+        document.getElementById('game-over-container').style.display = "flex";
     }
 
 
@@ -98,20 +98,27 @@ class MovableObjects extends DrawableObjects {
         }
     }
 
-    
+
     isDead() {
         return this.energy == 0;
     }
 
 
-    isHurt() {
+    isHurt(x) {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
-        return timePassed < 1;
+        return timePassed < x;
     }
 
-    
+
     killObject() {
         return this.energy = 0;
+    }
+
+
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) {
+            window.clearInterval(i);
+        }
     }
 }

@@ -17,6 +17,7 @@ let endbossSound = new Audio('audio/endboss.mp3')
 function startGame() {
     gameSound.volume = 0.5;
     gameSound.currentTime = 0.0;
+    endbossSound.currentTime = 0.0;
     hideStartScreen()
     startLevel();
     canvas = document.getElementById('canvas');
