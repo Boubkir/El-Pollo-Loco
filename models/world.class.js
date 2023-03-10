@@ -141,70 +141,43 @@ class World {
     }
 
 
-    collectItem(characterStat, levelArray, statusObject) {
-        levelArray.forEach((item) => {
-            if (this.character.isColliding(item) && characterStat <= 100) {
-                characterStat += 10;
-                statusObject.setPercentage(characterStat);
-                let index = levelArray.indexOf(item);
-                levelArray.splice(index, 1);
-                collectItemSound.play();
+    collectBottle() {
+        this.level.bottle.forEach((bottles) => {
+            if (this.character.isColliding(bottles) && this.character.bottles <= 100) {
+                this.character.bottles += 10;
+                this.statusBottleBar.setPercentage(this.character.bottles)
+                let index = this.level.bottle.indexOf(bottles)
+                this.level.bottle.splice(index, 1)
+                collectItemSound.play()
             }
-        });
+        })
     }
 
-    collectBottle() {
-        this.collectItem( this.character.bottles, this.level.bottle, this.statusBottleBar);
-    }
 
     collectCoin() {
-        this.collectItem( this.character.coins, this.level.coin, this.statusCoinBar);
+        this.level.coin.forEach((coins) => {
+            if (this.character.isColliding(coins) && this.character.coins <= 100) {
+                this.character.coins += 10;
+                this.statusCoinBar.setPercentage(this.character.coins)
+                let index = this.level.coin.indexOf(coins)
+                this.level.coin.splice(index, 1)
+                collectItemSound.play()
+            }
+        })
     }
+
 
     collectHeart() {
-        this.collectItem( this.character.energy, this.level.heart, this.statusBar);
+        this.level.heart.forEach((hearts) => {
+            if (this.character.isColliding(hearts) && this.character.energy <= 100) {
+                this.character.energy += 10;
+                this.statusBar.setPercentage(this.character.energy)
+                let index = this.level.heart.indexOf(hearts)
+                this.level.heart.splice(index, 1)
+                collectItemSound.play()
+            }
+        })
     }
-
-
-
-
-    // collectBottle() {
-    //     this.level.bottle.forEach((bottles) => {
-    //         if (this.character.isColliding(bottles) && this.character.bottles <= 100) {
-    //             this.character.bottles += 10;
-    //             this.statusBottleBar.setPercentage(this.character.bottles)
-    //             let index = this.level.bottle.indexOf(bottles)
-    //             this.level.bottle.splice(index, 1)
-    //             collectItemSound.play()
-    //         }
-    //     })
-    // }
-
-
-    // collectCoin() {
-    //     this.level.coin.forEach((coins) => {
-    //         if (this.character.isColliding(coins) && this.character.coins <= 100) {
-    //             this.character.coins += 10;
-    //             this.statusCoinBar.setPercentage(this.character.coins)
-    //             let index = this.level.coin.indexOf(coins)
-    //             this.level.coin.splice(index, 1)
-    //             collectItemSound.play()
-    //         }
-    //     })
-    // }
-
-
-    // collectHeart() {
-    //     this.level.heart.forEach((hearts) => {
-    //         if (this.character.isColliding(hearts) && this.character.energy <= 100) {
-    //             this.character.energy += 10;
-    //             this.statusBar.setPercentage(this.character.energy)
-    //             let index = this.level.heart.indexOf(hearts)
-    //             this.level.heart.splice(index, 1)
-    //             collectItemSound.play()
-    //         }
-    //     })
-    // }
 
 
     checkCollectItems() {
