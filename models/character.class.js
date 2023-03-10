@@ -88,14 +88,9 @@ class Character extends MovableObjects {
 
     characterPictureLogic() {
         if (this.isHurt(1)) {
-            charakterHurtSound.volume = 0.5;
-            charakterHurtSound.play()
-            this.playAnimation(this.IMAGES_HURT)
+            this.charakterHurt();
         } else if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD)
-                setTimeout(() => {
-                    this.gameOver()
-                }, 1600)
+            this.characterDies();
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING)
         } else {
@@ -103,6 +98,23 @@ class Character extends MovableObjects {
                 this.playAnimation(this.IMAGES_WALKING)
             }
         }
+    }
+
+
+    charakterHurt() {
+        charakterHurtSound.volume = 0.5;
+        charakterHurtSound.play()
+        this.playAnimation(this.IMAGES_HURT)
+    }
+
+
+    characterDies() {
+        this.playAnimation(this.IMAGES_DEAD)
+        gameOverSound.volume = 1;
+        gameOverSound.play()
+        setTimeout(() => {
+            this.gameOver()
+        }, 1600)
     }
 
 

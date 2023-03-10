@@ -12,13 +12,25 @@ let bottleSplashSound = new Audio('audio/bottle-splash.mp3');
 let deadChickenSound = new Audio('audio/chicken.mp3');
 let charakterHurtSound = new Audio('audio/hurt.mp3')
 let endbossSound = new Audio('audio/endboss.mp3')
+let gameOverSound = new Audio('audio/game-over.mp3')
+let youWinSound = new Audio('audio/you-win.mp3')
 
+function setVolume() {
+    gameSound.volume = 0.5;
+    gameOverSound.volume = 1;
+    charakterHurtSound.volume = 0.5;
+}
+
+
+function restartSounds() {
+    gameSound.currentTime = 0;
+    endbossSound.currentTime = 0;
+}
 
 function startGame() {
-    gameSound.volume = 0.5;
-    gameSound.currentTime = 0.0;
-    endbossSound.currentTime = 0.0;
-    hideStartScreen()
+    setVolume();
+    restartSounds();
+    hideStartScreen();
     startLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -41,6 +53,8 @@ function mutePage() {
     deadChickenSound.muted = !deadChickenSound.muted
     charakterHurtSound.muted = !charakterHurtSound.muted
     endbossSound.muted = !endbossSound.muted
+    gameOverSound.muted = !gameOverSound.muted
+    youWinSound.muted = !youWinSound.muted
     muted = !muted;
     toggleSound();
 }

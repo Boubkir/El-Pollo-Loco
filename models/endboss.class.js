@@ -64,7 +64,7 @@ class Endboss extends MovableObjects {
 
 
   reached() {
-    return world.character.x > 3000 && !this.firstContact;
+    return world.character.x > 4800 && !this.firstContact;
   }
 
 
@@ -108,6 +108,7 @@ class Endboss extends MovableObjects {
       this.gameOver();
     } else if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
+      youWinSound.play();
       setTimeout(() => {
           this.youWin()
       }, 500);
